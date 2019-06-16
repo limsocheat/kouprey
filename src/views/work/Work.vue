@@ -1,12 +1,5 @@
 <template>
   <div>
-    <v-carousel hide-delimiters>
-      <v-carousel-item
-        v-for="(item, i) in items"
-        :key="i"
-        :src="item.src"
-      ></v-carousel-item>
-    </v-carousel>
     <v-container>
       <v-layout row wrap>
         <v-flex xs12 md6 class="text-xs-left">

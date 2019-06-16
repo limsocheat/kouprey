@@ -1,205 +1,133 @@
 <template>
   <div>
-    <v-parallax
-      height="450"
-      :src="require('../assets/images/kouprey (1).jpg')"
-      style="padding: 0"
-    ></v-parallax>
-    <v-container grid-list-xl>
+    <v-carousel hide-delimiters>
+      <v-carousel-item
+        v-for="(item, i) in items"
+        :key="i"
+        :src="item.src"
+      ></v-carousel-item>
+    </v-carousel>
+    <v-container>
       <v-layout row wrap>
-        <v-flex xs12 md6>&nbsp;</v-flex>
-        <v-flex xs12 md6>
-          <p style="text-align: justify">{{ dummy }}</p>
-        </v-flex>
-        <v-flex xs12 md12>
-          <div class="mb-5">
-            <h2 class="display-1 font-weight-bold mr-5" style="float: left">
-              OUR STORY
-            </h2>
-            <h3 class="mr-5" style="float: left;">MISION</h3>
-            <h3 class="mr-5" style="float: left;">VISION</h3>
-            <h3 class="mr-5">CORE VALUE</h3>
-          </div>
-          <p>{{ dummy }}</p>
-          <p>{{ dummy }}</p>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container fluid style="background-color: #ddd">
-      <v-container grid-list-xl>
-        <v-layout row justify-space-around>
-          <v-flex xs12 md4 class="text-xs-center">
-            <h1
-              class="display-4 font-weight-medium text-uppercase"
-              style="color: #9c8400"
-            >
-              40+
-            </h1>
-            <h3 class="display-1 font-weight-black text-uppercase">Staff</h3>
-          </v-flex>
-          <v-flex xs12 md4 class="text-xs-center">
-            <h3 class="display-1 font-weight-black text-uppercase">
-              In Numbers
-            </h3>
-            <h1
-              class="display-4 font-weight-medium text-uppercase"
-              style="color: #9c8400"
-            >
-              900+
-            </h1>
-            <h3 class="display-1 font-weight-black text-uppercase">Clients</h3>
-          </v-flex>
-          <v-flex xs12 md4 class="text-xs-center">
-            <h1
-              class="display-4 font-weight-medium text-uppercase"
-              style="color: #9c8400"
-            >
-              5+
-            </h1>
-            <h3 class="display-1 font-weight-black text-uppercase">Years</h3>
-            <h4 class="heading font-weight-black text-uppercase">
-              In Business
-            </h4>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-container>
-    <v-container grid-list-xl class="pa-5">
-      <v-layout row wrap class="pa-5">
-        <v-flex xs12 md12 class="text-xs-center">
-          <h2 class="display-1 font-weight-black text-uppercase">
-            Together with our clients, we build thoughful indetities and
-            experiences, strong visual language stir up curiosity and emotions.
-          </h2>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container fluid style="background-color: #092e48">
-      <v-container grid-list-xl dark color>
-        <v-layout wrap row justify-space-around>
-          <v-flex xs12 md12 class="text-xs-center">
-            <h2
-              style="color: #fff"
-              class="display-1 font-weight-black text-uppercase"
-            >
-              Timeline
-            </h2>
-          </v-flex>
-          <v-flex xs12 md12>
-            <v-layout wrap row>
-              <v-flex
-                xs12
-                md4
-                v-for="(timeline, index) in timelines"
-                :key="index"
+        <v-flex xs12 md6 v-for="(work, index) in works" :key="index">
+          <v-hover>
+            <v-card slot-scope="{ hover }" class="mx-auto" flat>
+              <v-img
+                :src="work.image"
+                :lazy-src="work.image"
+                cover
+                aspect-ratio="1.7"
               >
-                <div :key="index">
-                  <v-btn
-                    depressed
-                    color="warning"
-                    style="margin: 0 !important"
-                    >{{ timeline.year }}</v-btn
+                <v-expand-transition>
+                  <div
+                    v-if="hover"
+                    class="transition-fast-in-fast-out indigo darken-4 v-card--reveal text-xs-center text-xs-middle py-5"
+                    style="height: 100%;"
                   >
-                  <v-img
-                    :lazy-src="timeline.image"
-                    :src="timeline.image"
-                    width="100%"
-                    contain
-                  ></v-img>
-                  <div style="color: #fff; padding-top: 20px">
-                    {{ timeline.description }}
+                    <h2 class="display-2 white--text">{{ work.name }}</h2>
+                    <br />
+                    <v-btn :to="{ name: 'work.single' }">Read More</v-btn>
                   </div>
-                </div>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-container>
-    <v-container grid-list-xl>
-      <v-layout wrap row>
-        <v-flex xs12 md12>
-          <h2 class="display-1 font-weight-black text-uppercase">
-            We Create
-            <br />A great office culture & <br />A Great Place To Work!
-          </h2>
-        </v-flex>
-        <v-flex xs12 md6 class="text-xs-left">
-          <v-img
-            :src="require('../assets/images/kouprey (5).jpg')"
-            class="my-5"
-            style="max-width: 500px"
-          ></v-img>
-          <h3 class="heading font-weight-black text-uppercase">
-            Flourish
-            <br />creativities
-          </h3>
-        </v-flex>
-        <v-flex xs12 md6>
-          <h3 class="heading font-weight-black text-uppercase">
-            Space
-            <br />Which you to breath
-          </h3>
-          <v-img
-            :src="require('../assets/images/kouprey (3).jpg')"
-            class="my-5 text-xs-right"
-            style="max-width: 500px"
-          ></v-img>
+                </v-expand-transition>
+              </v-img>
+            </v-card>
+          </v-hover>
         </v-flex>
       </v-layout>
     </v-container>
-    <v-container grid-list-xl>
-      <v-layout wrap row>
-        <v-flex xs12 md12 class="text-xs-center">
-          <h2 class="display-1 text-uppercase">Explore More:</h2>
-          <h2 class="display-1 font-weight-black text-uppercase">Our Team</h2>
-          <h2 class="display-1 font-weight-black text-uppercase">
-            Our Client Director
-          </h2>
-          <h2 class="display-1 font-weight-black text-uppercase">
-            Press / Award / Recoginisation
-          </h2>
-          <h2 class="display-1 font-weight-black text-uppercase">CSR</h2>
-        </v-flex>
-      </v-layout>
-    </v-container>
-
     <JoinNewsletter></JoinNewsletter>
   </div>
 </template>
 
 <script>
 import JoinNewsletter from "@/components/JoinNewsletter";
-
 export default {
   components: {
     JoinNewsletter
   },
   data() {
     return {
-      dummy:
-        "KOUPREY CREATIVE SOLUTIONS CO., LTD. is a Cambodia’s renowned brand and identity design agency. Our notable clients include AEON Specialized Bank, AIA Insurance, ISI Group, Chakreyting Cement Factory and many more. Additionally, we create new brand identity for hundreds of local and international clients. Aside from our expertise in brand identity design, we are well-known for good services, processes as well as our contributions to the society. Our brand and working culture are unique and strong, which leads to the success of attracting top local talents.",
-      timelines: [
+      properties: [],
+      items: [
         {
-          year: 2014,
-          description: "around 40 sqm",
-          image:
-            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/57176881_2220424688174259_8021028292033249280_n.jpg?_nc_cat=100&_nc_eui2=AeGfRTiWBREfTUCOleQdb2Wauu1LxW2tyZPtHLHEfJgb94GmiLpvOVYWOk-Lf8TrzXiTHVyK9poJc6UKDliFycgQYYGY5l0XjBA3Yh-D0YWdTA&_nc_oc=AQkg_xurqmt1irV_LjJuClthnwoA5S7xddFuql_uKmZfkN0pF4Ky03QaPDTFBzJWyM4&_nc_ht=scontent.fpnh8-2.fna&oh=de4f335c038b6f4f9d56984ff825418f&oe=5D8D114A"
+          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg"
         },
         {
-          year: 2015,
-          description: "around 100 sqm",
-          image:
-            "https://scontent.fpnh8-1.fna.fbcdn.net/v/t1.0-9/46972260_2138495756367153_2783434924328222720_n.jpg?_nc_cat=111&_nc_eui2=AeFk_ZShRgjGH6-su4OS6OjhwO53-XaGoULXCFdYX4P_yrl3w2qfLI6RJwxqLrKnQIIYrWaZCyLnz67QLUYSlxM-Iwy7x6c4ZIyQcrU00tDtgQ&_nc_oc=AQlRTXV9QmRMZKnV8UVEtu9wRNkqyAsnZhs4dWJsG_SjuYiar6Lrzr1RreN62ciQdUs&_nc_ht=scontent.fpnh8-1.fna&oh=ec7a76741f8f3a1bc7f9ef3b94987ec8&oe=5D82BA0E"
+          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
         },
         {
-          year: 2018,
-          description: "around 350 sqm",
+          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg"
+        },
+        {
+          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg"
+        }
+      ],
+      works: [
+        {
+          name: "Work 1",
           image:
-            "https://scontent.fpnh8-1.fna.fbcdn.net/v/t1.0-9/46787674_2138495796367149_4089257213133062144_n.jpg?_nc_cat=105&_nc_eui2=AeFWOUd0knbiurjVXdFKQuL85Jae_dLXJ86eG22sHPd_Mi5Yy9BazLU7EIMW3ioNRiuqMnCMknV7bMMZIBtvOI_pVMybQdVrjtYJ_de3oGKk4A&_nc_oc=AQmq5-gSiAo6kn2bPKaAFW6LEtgHFLNCbp9qEfXMtw7829sOS4K-Zbqck8u1I2ZI1oI&_nc_ht=scontent.fpnh8-1.fna&oh=d256009f6e6465bd12ef8c07e80e8904&oe=5D8C133B"
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/46287837_2131856357031093_929737493325021184_n.jpg?_nc_cat=101&_nc_eui2=AeFwBXOKTiFyZt3iAiaf8uob-Wt-_JcUKbMcvxrS5dnzerHfiRcTt_HtTZxDbGvKYXmARa5bt66FDywlXJ3iU4hfr-lLuBWiFr-qiA9Lyk4HXw&_nc_oc=AQmTOIi-aPCjehaWrTukjQrYBfzYgNMNcAlraXUMy97mJHuhI2_2K3aL-3h2H0qmZHQ&_nc_ht=scontent.fpnh8-2.fna&oh=8a139e07124b394321fe7b71c9fd6b4b&oe=5D5588AD"
+        },
+        {
+          name: "Work 2",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/46285301_2131856337031095_6968617947094843392_n.jpg?_nc_cat=104&_nc_eui2=AeHHjRO67j4Aq-E3LvhwaHgA4AqFfrL7o9e6iuQ6uYoendryhc6pTbnBFrPsyv47kulVJO7Hvvh-D0wB6iHiAVXiOhx-JRXnH9zn67kVxgEZBg&_nc_oc=AQnE7EYPxahBRZd16xj2FWEta2Z5R5gHMLtQOzOlZrAU8F0rY8A2zBfsPFrt-tek81A&_nc_ht=scontent.fpnh8-2.fna&oh=6b4ee749abfc085ad4b44b127b4df285&oe=5D9A149B"
+        },
+        {
+          name: "Work 3",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/46440613_2131856323697763_201124775781728256_n.jpg?_nc_cat=110&_nc_eui2=AeGm7ziZmfE50gTMXhkwQ6mGL-bix1E7eSE9s1vGUhfKTXQ2dZraJIocFgD846BpGmmgjhf6Q9rP7TSm4i88zM-vvSAMKZYR2nMD2jA6KTrFLQ&_nc_oc=AQk1KIbQ7kPm_j7GFUVDDvKoVOcEhsVSf_03u0NwvFN8aYH_Ti7wHhVWP0JlOOclXjc&_nc_ht=scontent.fpnh8-2.fna&oh=c7c77cd98af9f37503eca53a18e4cd94&oe=5D8453D4"
+        },
+        {
+          name: "Work 4",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/46400408_2131856137031115_8916770676828798976_n.jpg?_nc_cat=108&_nc_eui2=AeENFAZW3IzZg4H8ucmJSHRNKmXUVjAqCKR1nflGrs_W6G2J6yb11cvbrntvL5Ptu56K_dJP6c5jl5XLeuatg05KHyMZQy0y7CUlMRY17OySPg&_nc_oc=AQm0UVaoqFf1uew5CLN7Y_Hoo61yEQxw65kNw6x7ZY_ZYZZvx47oy3S_rMLrDwIX7VU&_nc_ht=scontent.fpnh8-2.fna&oh=f2cfb54c6f44616e8be546736b9f4ce3&oe=5D51A319"
+        },
+        {
+          name: "Work 5",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/46407379_2131856100364452_6424094726223298560_n.jpg?_nc_cat=100&_nc_eui2=AeEveeRpUnHYFcAXavpWbMabMJ1z87jCn_6z48l89zN8beZtHIvo8vSJugmn7DF_QVUwD7Ti8gG-6fFIPIWbfuBiw6dVOVjpEE8WjU97QSyBZw&_nc_oc=AQk-FMJl3wJ28C-Ut3uG7wrhaEOXSxh_X2b9R1dWkqh3wuv_xFnsRvhpUPyZ4JGHDBE&_nc_ht=scontent.fpnh8-2.fna&oh=52818a12e87a614811f7cf027bf95f8c&oe=5D9E5596"
+        },
+        {
+          name: "Work 6",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/44653843_2119126004970795_228859144843558912_n.jpg?_nc_cat=110&_nc_eui2=AeFKwnSuOeUrv59QsIiTQajFmoZpJ7HmVrcXjG5PR7Ba8WdcCkSt-4uY34bJq0UJFokl8R9qVX94V5Pg9skI7Fq5YlmQQwTEnBnIuiLpfb6E2A&_nc_oc=AQlKseuZKW-OZvHugCrGe7v9AeWK-laJIA6uxCPX_H4srGcUvFyR4K1ZDha6BzGfo5o&_nc_ht=scontent.fpnh8-2.fna&oh=3b33c594ebe212488288ed9820aed927&oe=5D56A5F9"
+        },
+        {
+          name: "Work 7",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/44307963_2117628701787192_3994236297274195968_n.jpg?_nc_cat=100&_nc_eui2=AeGhNID6J0I06EpcIIhvybVEpAR0WV6BqZ7Tp9gSalzNQisWmqa3byf2EtHV4gwRW1AyaszteXJEBhKgVrjDeFLXXGWRfNOWpXmdxXky0DR_bg&_nc_oc=AQngUFjHzE5K-WDJxNDNHLDxn10I4BbVy1jrmsMBYOit0LJNC57PDkfzAG6-eKgNA7I&_nc_ht=scontent.fpnh8-2.fna&oh=6285873beeb4eeb5b1445d9d50fa66f7&oe=5D93AF43"
+        },
+        {
+          name: "Work 8",
+          image:
+            "https://scontent.fpnh8-2.fna.fbcdn.net/v/t1.0-9/38760466_2074188042797925_2180339306000809984_n.png?_nc_cat=107&_nc_eui2=AeGxkt1PpBulHhlPBCUChHonkb9dhu82jvv2hGi8Ma0lXOqSHwa0GgMy79oKG0L0ui8K3Z-nFqSpRrAwvopPEfUjabmkS1fJGRDpqw-bqJzB5A&_nc_oc=AQm2k1lOvtUiUoQ4L4cMn2iXZ1k4XIhPgMsoZ3YSEOJ6R_YwYI5-MluTvx4fA8LccFI&_nc_ht=scontent.fpnh8-2.fna&oh=503d8c2930080528de7c8b7ee576b2f8&oe=5D871EF3"
         }
       ]
     };
+  },
+
+  created() {
+    this.getProperties();
+  },
+
+  methods: {
+    getProperties() {
+      this.$api
+        .get("/crm/properties", {
+          auth: {
+            username: "2533",
+            password: "d84694f2a9ef9163bfc5e4faac17afcb278445bc"
+          },
+          withCredentials: true,
+          crossDomain: true
+        })
+        .then(response => {
+          this.properties = response.data;
+        });
+    }
   }
 };
 </script>
+
+<style></style>

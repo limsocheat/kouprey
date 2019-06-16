@@ -53,8 +53,19 @@ const router = new Router({
 		},
 		{
 			path: "/about",
-			name: "about",
-			component: () => import("./views/About.vue")
+			component: () => import("./views/about/Index.vue"),
+			meta: {
+				title: 'Portfolios - Example App',
+			},
+			children: [{
+				path: '',
+				name: "about",
+				component: () => import("./views/about/About.vue")
+			}, {
+				path: 'team',
+				name: "about.team",
+				component: () => import("./views/about/Team.vue"),
+			}]
 		},
 		{
 			path: "/contact",

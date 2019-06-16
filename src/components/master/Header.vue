@@ -13,13 +13,28 @@
         </router-link>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn
-            flat
+          <v-menu
+            open-on-hover
+            offset-y
             v-for="(menu, index) in menus"
             :key="index"
-            :to="{ name: menu.link }"
-            >{{ menu.title }}</v-btn
           >
+            <template v-slot:activator="{ on }">
+              <v-btn flat :to="{ name: menu.link }" v-on="on">
+                {{ menu.title }}
+                <v-icon v-show="menu.children">arrow_drop_down</v-icon>
+              </v-btn>
+            </template>
+            <v-list v-show="menu.children" style="min-width: 250px">
+              <v-list-tile
+                v-for="(child, index) in menu.children"
+                :key="index"
+                :to="{ name: child.link }"
+              >
+                <v-list-tile-title>{{ child.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </v-toolbar-items>
         <v-toolbar-items>
           <v-btn flat @click.stop="drawer = !drawer" icon>
@@ -71,7 +86,13 @@ export default {
         },
         {
           title: "About",
-          link: "about"
+          link: "about",
+          children: [
+            {
+              title: "Our Team",
+              link: "about.team"
+            }
+          ]
         },
         {
           title: "Thought",
